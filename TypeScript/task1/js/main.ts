@@ -1,34 +1,27 @@
 // main.ts
 
-// 1. Define la interfaz Teacher
 interface Teacher {
-  readonly firstName: string;   // solo se puede asignar al inicializar
-  readonly lastName: string;    // solo se puede asignar al inicializar
-  fullTimeEmployee: boolean;
-  yearsOfExperience?: number;   // opcional
-  location: string;
-  [propName: string]: any;      // permite atributos adicionales con nombre string y cualquier tipo
+  readonly firstName: string;   // Only set during initialization
+  readonly lastName: string;    // Only set during initialization
+  fullTimeEmployee: boolean;    // Required
+  yearsOfExperience?: number;   // Optional
+  location: string;             // Required
+  [propName: string]: any;      // Allows additional properties
 }
 
-// 2. Crea un objeto Teacher de ejemplo
-const teacher1: Teacher = {
+// Directors interface extends Teacher
+// Adds a required property numberOfReports
+interface Directors extends Teacher {
+  numberOfReports: number;
+}
+
+// Example usage
+const director1: Directors = {
   firstName: "John",
   lastName: "Doe",
+  location: "London",
   fullTimeEmployee: true,
-  location: "Mexico",
-  contract: false, // atributo adicional permitido
+  numberOfReports: 17,
 };
 
-// 3. Otro ejemplo con yearsOfExperience
-const teacher2: Teacher = {
-  firstName: "Jane",
-  lastName: "Smith",
-  fullTimeEmployee: false,
-  yearsOfExperience: 10,
-  location: "USA",
-  contract: true, // atributo adicional permitido
-};
-
-// 4. Mostrar en consola para verificar
-console.log(teacher1);
-console.log(teacher2);
+console.log(director1);
