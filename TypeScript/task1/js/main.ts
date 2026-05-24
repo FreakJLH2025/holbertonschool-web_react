@@ -9,19 +9,18 @@ interface Teacher {
   [propName: string]: any;      // Allows additional properties
 }
 
-// Directors interface extends Teacher
-// Adds a required property numberOfReports
-interface Directors extends Teacher {
-  numberOfReports: number;
+// 1. Define the interface for the function
+// - It accepts two string arguments: firstName and lastName
+// - It returns a string
+interface printTeacherFunction {
+  (firstName: string, lastName: string): string;
 }
 
-// Example usage
-const director1: Directors = {
-  firstName: "John",
-  lastName: "Doe",
-  location: "London",
-  fullTimeEmployee: true,
-  numberOfReports: 17,
+// 2. Implement the function
+const printTeacher: printTeacherFunction = (firstName: string, lastName: string): string => {
+  return `${firstName.charAt(0)}. ${lastName}`;
 };
 
-console.log(director1);
+// 3. Example usage
+console.log(printTeacher("John", "Doe")); // Output: J. Doe
+console.log(printTeacher("Jane", "Smith")); // Output: J. Smith
