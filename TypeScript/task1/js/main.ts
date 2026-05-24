@@ -1,26 +1,40 @@
 // main.ts
 
-interface Teacher {
-  readonly firstName: string;   // Only set during initialization
-  readonly lastName: string;    // Only set during initialization
-  fullTimeEmployee: boolean;    // Required
-  yearsOfExperience?: number;   // Optional
-  location: string;             // Required
-  [propName: string]: any;      // Allows additional properties
+// Interface describing the constructor arguments
+interface StudentConstructor {
+  firstName: string;
+  lastName: string;
 }
 
-// 1. Define the interface for the function
-// - It accepts two string arguments: firstName and lastName
-// - It returns a string
-interface printTeacherFunction {
-  (firstName: string, lastName: string): string;
+// - It must have workOnHomework() returning a string
+// - It must have displayName() returning the firstName
+interface StudentClassInterface {
+  workOnHomework(): string;
+  displayName(): string;
 }
 
-// 2. Implement the function
-const printTeacher: printTeacherFunction = (firstName: string, lastName: string): string => {
-  return `${firstName.charAt(0)}. ${lastName}`;
-};
+// 3. Implement the class using the interfaces
+class StudentClass implements StudentClassInterface {
+  private firstName: string;
+  private lastName: string;
 
-// 3. Example usage
-console.log(printTeacher("John", "Doe")); // Output: J. Doe
-console.log(printTeacher("Jane", "Smith")); // Output: J. Smith
+  constructor({ firstName, lastName }: StudentConstructor) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+  }
+
+  // Method that returns "Currently working"
+  workOnHomework(): string {
+    return "Currently working";
+  }
+
+  // Method that returns the student's firstName
+  displayName(): string {
+    return this.firstName;
+  }
+}
+
+// 4. Example usage
+const student = new StudentClass({ firstName: "John", lastName: "Doe" });
+console.log(student.displayName());     // Output: John
+console.log(student.workOnHomework());  // Output: Currently working
